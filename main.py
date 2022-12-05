@@ -60,6 +60,8 @@ for x in charList:
             condList.append(temp)
         condList.append(x)
         temp = ''
+condList.append(temp)
+
 while True:
     if '' in condList:
         condList.remove('')
