@@ -1,7 +1,1 @@
-TestA
-Test2
-Test(3)
-Test(Four)
-Test(55)
-TEST
-test
+if (color = color) AND (red <> green) AND (6 > 7) then

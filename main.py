@@ -1,4 +1,3 @@
-
 FoI = ''
 FName = ''
 sCode = []
@@ -68,5 +67,97 @@ while True:
     else:
         break
 print(condList) #TBD
+def checkIf(condList):
+    # if color = red then
+    # if( a < 20 ) then
+    # if(boolean_expression 1)then
+    # IF (StartDay <> BadDay) AND (EndDay <> BadDay) THEN
+    # if (exit) then
+    # if not (a and b) then
+    condition_list = []
+    true_false_list = []
+    is_if = False
+    is_and = False
+    is_or = False
+    for x in condList:
+        if x == ' ':
+            continue
+        if x.upper() == "AND":
+            is_and = True
+            condition_list = []
+            continue
+        if x.upper() == "OR":
+            is_or = True
+            condition_list = []
+            continue
+        if x == ")" or x.lower() == "then":
+            if len(condition_list) == 1:
+                # if (exit) then
+                if condition_list[0] == True:
+                    true_false_list.append(True)
+                else:
+                    true_false_list.append(False)
+            # if len(condition_list) == 2:
+            #     # if(boolean_expression 1)then
+            if len(condition_list) == 3:
+                # if( a < 20 ) then
+                left = condition_list[0]
+                operator = condition_list[1]
+                right = condition_list[2]
+                if operator == '<':
+                    if left < right:
+                        true_false_list.append(True)
+                    else:
+                        true_false_list.append(False)
+                if operator == '>':
+                    if left > right:
+                        true_false_list.append(True)
+                    else:
+                        true_false_list.append(False)
+                if operator == '=':
+                    if left == right:
+                        true_false_list.append(True)
+                    else:
+                        true_false_list.append(False)
+            if len(condition_list) == 4:
+                left = condition_list[0]
+                operator = condition_list[1]+condition_list[2]
+                right = condition_list[3]
+                if operator == '<>':
+                    if left != right:
+                        true_false_list.append(True)
+                    else:
+                        true_false_list.append(False)
 
+            condition_list = []
+            if x.lower() == ")":
+                if is_and:
+                    and_result = true_false_list[0] and true_false_list[1]
+                    true_false_list = [and_result]
+                    is_and = False
+                if is_or:
+                    or_result = true_false_list[0] or true_false_list[1]
+                    true_false_list = [or_result]
+                    is_or = False
+            if x.lower() == "then":
+                is_if = False
+                if len(true_false_list) == 2:
+                    if is_and:
+                        and_result = true_false_list[0] and true_false_list[1]
+                        true_false_list = [and_result]
+                        is_and = False
+                    if is_or:
+                        or_result = true_false_list[0] or true_false_list[1]
+                        true_false_list = [or_result]
+                        is_or = False
+                return true_false_list[0]
+
+        if x == "(":
+            continue
+        if is_if == True:
+            condition_list.append(x)
+        if x.lower() == "if":
+            is_if = True
+
+print(checkIf(condList))
 
