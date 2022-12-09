@@ -1,1 +1,1 @@
-if (color = color) AND (red <> green) AND (6 > 7) then
+if color then

@@ -67,6 +67,47 @@ while True:
     else:
         break
 print(condList) #TBD
+
+def checkBooleanExpression(condition_list):
+    if len(condition_list) == 1:
+        # if (exit) then
+        if condition_list[0] == True:
+            return True
+        else:
+            return False
+    # else if len(condition_list) == 2:
+    #     # if(boolean_expression 1)then
+    if len(condition_list) == 3:
+        # if( a < 20 ) then
+        left = condition_list[0]
+        operator = condition_list[1]
+        right = condition_list[2]
+        if operator == '<':
+            if left < right:
+                return True
+            else:
+                return False
+        if operator == '>':
+            if left > right:
+                return True
+            else:
+                return False
+        if operator == '=':
+            if left == right:
+                return True
+            else:
+                return False
+    if len(condition_list) == 4:
+        left = condition_list[0]
+        operator = condition_list[1] + condition_list[2]
+        right = condition_list[3]
+        if operator == '<>':
+            if left != right:
+                return True
+            else:
+                return False
+
+
 def checkIf(condList):
     # if color = red then
     # if( a < 20 ) then
@@ -91,43 +132,9 @@ def checkIf(condList):
             condition_list = []
             continue
         if x == ")" or x.lower() == "then":
-            if len(condition_list) == 1:
-                # if (exit) then
-                if condition_list[0] == True:
-                    true_false_list.append(True)
-                else:
-                    true_false_list.append(False)
-            # if len(condition_list) == 2:
-            #     # if(boolean_expression 1)then
-            if len(condition_list) == 3:
-                # if( a < 20 ) then
-                left = condition_list[0]
-                operator = condition_list[1]
-                right = condition_list[2]
-                if operator == '<':
-                    if left < right:
-                        true_false_list.append(True)
-                    else:
-                        true_false_list.append(False)
-                if operator == '>':
-                    if left > right:
-                        true_false_list.append(True)
-                    else:
-                        true_false_list.append(False)
-                if operator == '=':
-                    if left == right:
-                        true_false_list.append(True)
-                    else:
-                        true_false_list.append(False)
-            if len(condition_list) == 4:
-                left = condition_list[0]
-                operator = condition_list[1]+condition_list[2]
-                right = condition_list[3]
-                if operator == '<>':
-                    if left != right:
-                        true_false_list.append(True)
-                    else:
-                        true_false_list.append(False)
+            # Check Boolean Expression
+            result_boolean = checkBooleanExpression(condition_list)
+            true_false_list.append(result_boolean)
 
             condition_list = []
             if x.lower() == ")":
@@ -158,6 +165,7 @@ def checkIf(condList):
             condition_list.append(x)
         if x.lower() == "if":
             is_if = True
+
 
 print(checkIf(condList))
 
