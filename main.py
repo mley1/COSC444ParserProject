@@ -68,53 +68,59 @@ while True:
         break
 print(condList) #TBD
 
-def checkBooleanExpression(condition_list):
+#########################################################
+# Checks for boolean operation.
+#########################################################
+def CheckBooleanOperator(left, operator, right):
+    if operator == '<':
+        if left < right:
+            return True
+        else:
+            return False
+    if operator == '>':
+        if left > right:
+            return True
+        else:
+            return False
+    if operator == '=':
+        if left == right:
+            return True
+        else:
+            return False
+    if operator == '<>':
+        if left != right:
+            return True
+        else:
+            return False
+
+
+#########################################################
+# Checks for boolean expression.
+#########################################################
+def CheckBooleanExpression(condition_list):
     if len(condition_list) == 1:
         # if (exit) then
         if condition_list[0] == True:
             return True
         else:
             return False
-    # else if len(condition_list) == 2:
-    #     # if(boolean_expression 1)then
+
     if len(condition_list) == 3:
-        # if( a < 20 ) then
         left = condition_list[0]
         operator = condition_list[1]
         right = condition_list[2]
-        if operator == '<':
-            if left < right:
-                return True
-            else:
-                return False
-        if operator == '>':
-            if left > right:
-                return True
-            else:
-                return False
-        if operator == '=':
-            if left == right:
-                return True
-            else:
-                return False
+        return CheckBooleanOperator(left, operator, right)
     if len(condition_list) == 4:
         left = condition_list[0]
         operator = condition_list[1] + condition_list[2]
         right = condition_list[3]
-        if operator == '<>':
-            if left != right:
-                return True
-            else:
-                return False
+        return CheckBooleanOperator(left, operator, right)
 
+#########################################################
+# Checks for if statements.
+#########################################################
+def CheckIf(condList):
 
-def checkIf(condList):
-    # if color = red then
-    # if( a < 20 ) then
-    # if(boolean_expression 1)then
-    # IF (StartDay <> BadDay) AND (EndDay <> BadDay) THEN
-    # if (exit) then
-    # if not (a and b) then
     condition_list = []
     true_false_list = []
     is_if = False
@@ -132,8 +138,7 @@ def checkIf(condList):
             condition_list = []
             continue
         if x == ")" or x.lower() == "then":
-            # Check Boolean Expression
-            result_boolean = checkBooleanExpression(condition_list)
+            result_boolean = CheckBooleanExpression(condition_list)
             true_false_list.append(result_boolean)
 
             condition_list = []
@@ -167,5 +172,5 @@ def checkIf(condList):
             is_if = True
 
 
-print(checkIf(condList))
+print(CheckIf(condList))
 
