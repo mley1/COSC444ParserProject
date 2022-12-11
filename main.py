@@ -2,7 +2,6 @@
 import Fun
 
 class colors:
-    HEADER = '\033[95m'
     BLUE = '\033[94m'
     CYAN = '\033[96m'
     GREEN = '\033[92m'
@@ -116,8 +115,7 @@ while True:
    # print(f'updated Current State = {currentState}')
     if currentState == -1:
         workingList.remove('\n')
-        tempLine = ''.join(workingList)
-        print(f'{colors.YELLOW}{tempLine}{colors.ENDC}{colors.RED}<--ERROR detected in this line{colors.ENDC}')
+        print(''.join(workingList) + f'{colors.RED}<--Line is out of place in grammar{colors.ENDC}')
         break
     if currentState == 0:
         print('ERROR')
@@ -132,7 +130,7 @@ while True:
             #print(f'condList = {condList}')
             #break #TBD
         else:
-            print(''.join(workingList) + 'ERROR DETECTED')
+            print(''.join(workingList) + f'{colors.RED}ERROR DETECTED{colors.ENDC}')
             break
     elif currentState == 2:
         print('Vars Not Yet implemented')
