@@ -1,15 +1,6 @@
 
 import Fun
 
-class colors:
-    BLUE = '\033[94m'
-    CYAN = '\033[96m'
-    GREEN = '\033[92m'
-    YELLOW = '\033[93m'
-    RED = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
 
 FoI = ''
 FName = ''
@@ -115,7 +106,7 @@ while True:
    # print(f'updated Current State = {currentState}')
     if currentState == -1:
         workingList.remove('\n')
-        print(''.join(workingList) + f'{colors.RED}<--Line is out of place in grammar{colors.ENDC}')
+        print(''.join(workingList) + f'{Fun.colors.RED}<--Line is out of place in grammar{Fun.colors.ENDC}')
         break
     if currentState == 0:
         print('ERROR')
@@ -130,7 +121,7 @@ while True:
             #print(f'condList = {condList}')
             #break #TBD
         else:
-            print(''.join(workingList) + f'{colors.RED}ERROR DETECTED{colors.ENDC}')
+            print(''.join(workingList) + f'{Fun.colors.RED}ERROR DETECTED{Fun.colors.ENDC}')
             break
     elif currentState == 2:
         print('Vars Not Yet implemented')
