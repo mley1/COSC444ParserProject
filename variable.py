@@ -38,7 +38,7 @@ def CheckVar(varList):
             varList.pop(spaceList[i] - i)
 
     if varList[len(varList) - 2] != ';':
-        print(';')
+        #print(';')
         check = False
         return check
     for i in range(len(varList) - 1):

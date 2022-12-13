@@ -1,2 +1,6 @@
 program test;
-program test;
+var
+number : integer;
+guard : boolean;
+double,x : real;
+Procedure

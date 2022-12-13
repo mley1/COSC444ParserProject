@@ -55,4 +55,4 @@ def CheckIf(condList):
             is_if = True
 
 
-print(CheckIf(condList))
+#print(CheckIf(condList))

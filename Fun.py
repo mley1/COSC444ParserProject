@@ -8,13 +8,15 @@ class colors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-def stateChoose(input):
-    States = ['program', 'var'];
 
+def stateChoose(input):
+    States = ['program', 'var', 'procedure', 'function', 'begin'];
+    input = input.lower()
     if input in States:
         return (States.index(input)+1)
     else:
         return 0
+
 
 def getToNewLine(inputList):
     newList = []
@@ -27,21 +29,34 @@ def getToNewLine(inputList):
             newList.append(x)
             #print(newList)
             return newList
-def parseProgramName(inputList):
-    parseList = inputList.copy()
+
+
+def spaceDelete(inputList):
+    if inputList is not None:
+        parseList = inputList.copy()
+    else:
+        return inputList
     while True:
         if ' ' in parseList:
             parseList.remove(' ')
         else:
             break
-    #print(f'remove whitespace = {parseList}')
+    return parseList
+
+
+def parseProgramName(inputList):
+    parseList = spaceDelete(inputList)
     if parseList[0] == 'program' and str(parseList[1]) and parseList[2] == ';' and parseList[3] == '\n':
         return True
     else:
         return False
+
+
 def removeLine(inputList):
     while True:
-        if inputList[0] != '\n':
+        if len(inputList) == 0:
+            break
+        elif inputList[0] != '\n':
             del inputList[0]
         else:
             del inputList[0]

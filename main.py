@@ -1,6 +1,9 @@
 
 import Fun
-
+import variable
+import checkIf
+import checkFor
+import Booleanops
 
 FoI = ''
 FName = ''
@@ -16,7 +19,7 @@ GrammerMajor = [
     [0, 0, 1, 0, 0, 0],  # ProgramName (1)
     [0, 0, 1, 1, 1, 1],  # Variables (2)
     [0, 0, 0, 1, 1, 1],  # Procedures (3)
-    [0, 0, 0, 0, 1, 1],  # Function (4)
+    [0, 0, 0, 1, 1, 1],  # Function (4)
     [0, 0, 0, 0, 0, 1]   # Main (5)
 ]
 currentState = 0
@@ -106,7 +109,8 @@ while True:
    # print(f'updated Current State = {currentState}')
     if currentState == -1:
         workingList.remove('\n')
-        print(''.join(workingList) + f'{Fun.colors.RED}<--Line is out of place in grammar{Fun.colors.ENDC}')
+        print(''.join(workingList) + f'{Fun.colors.RED}'
+                                                  f'<--Line is out of place in grammar{Fun.colors.ENDC}')
         break
     if currentState == 0:
         print('ERROR')
@@ -124,16 +128,45 @@ while True:
             print(''.join(workingList) + f'{Fun.colors.RED}ERROR DETECTED{Fun.colors.ENDC}')
             break
     elif currentState == 2:
-        print('Vars Not Yet implemented')
-        break
+        workingList.remove('\n')
+        print(''.join(workingList))
+        guardA = True
+        while guardA == True:
+            workingList = Fun.getToNewLine(condList)
+            #print(condList)
+            #print(len(condList))
+            if len(condList) > 0:
+                Fun.removeLine(condList)
+            else:
+                print('\n Program works')
+                break
+            if variable.CheckVar(Fun.spaceDelete(workingList)):
+                workingList.remove('\n')
+                print(''.join(workingList))
+            elif Fun.stateChoose(workingList[0]) != 0:
+                print(f'CondList = {condList}')
+                print(f'workingList = {workingList}')
+                condList = workingList + condList
+                print(f'CondList = {condList}')
+                guardA = False
+            else:
+                workingList.remove('\n')
+                print(''.join(workingList) + f'{Fun.colors.RED}'
+                                             f'<--Line contains an error{Fun.colors.ENDC}')
     elif currentState == 3:
-        print('Procedures Not Yet implemented')
+        workingList.remove('\n')
+        print(''.join(workingList))
+        print(f'{Fun.colors.RED}Procedures Not Yet implemented{Fun.colors.ENDC}')
         break
     elif currentState == 4:
-        print('Functions Not Yet implemented')
+        workingList.remove('\n')
+        print(''.join(workingList))
+        print(f'{Fun.colors.RED}Functions Not Yet implemented{Fun.colors.ENDC}')
         break
     elif currentState == 5:
-        print('Main Not Yet implemented')
+        workingList.remove('\n')
+        print(''.join(workingList))
+        print(f'{Fun.colors.RED}Main Not Yet implemented{Fun.colors.ENDC}')
         break
 
 

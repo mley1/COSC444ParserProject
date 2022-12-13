@@ -1,3 +1,6 @@
-first Line
-second Line
-third Line
+program test;
+var
+number : integer;
+guard : boolean;
+double,x : real;
+Procedure
