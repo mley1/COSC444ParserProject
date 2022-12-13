@@ -75,6 +75,7 @@ print(condList) #TBD
 #########################################################
 def checkFor(inputList):
     currentValue = 0
+    checkstring = ""
     shortList = []
     j= 0
 
@@ -87,20 +88,23 @@ def checkFor(inputList):
         break
 
     for i in range(len(shortList)):
-        if i == 0 and shortList[i] == 'for':
-            currentValue = 1
+        if shortList[i] == 'for':
+            currentValue = currentValue + 1
+            checkstring = checkstring + "a"
         else:
             currentValue = 0
-        if i == 4 and shortList[i] == 'to':
-            currentValue = 1
+        if shortList[i] == 'to':
+            currentValue = currentValue + 1
+            checkstring = checkstring + "b"
         else:
             currentValue = 0
-        if i == 6 and shortList[i] == 'do':
-            currentValue = 1
+        if shortList[i] == 'do':
+            currentValue = currentValue + 1
+            checkstring = checkstring + "c"
         else:
             currentValue = 0
 
-    if currentValue == 1:
+    if currentValue == 3 and checkstring == "abc":
         return True
     else:
         return False
