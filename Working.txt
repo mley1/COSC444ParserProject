@@ -1,1 +1,1 @@
-if color then
+print(BeginEnd(l))

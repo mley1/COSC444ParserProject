@@ -68,6 +68,7 @@ while True:
         break
 print(condList) #TBD
 
+
 #########################################################
 # Checks for boolean operation.
 #########################################################
@@ -173,4 +174,29 @@ def CheckIf(condList):
 
 
 print(CheckIf(condList))
+
+#########################################################
+# returns a list of begin end statements
+#########################################################
+def BeginEnd(condList):
+    beginCount = 0
+    endCount = 0
+    resultList = []
+    beginEndList = []
+    for word in condList:
+        if word.lower() == "begin":
+            beginCount += 1
+            beginEndList.append(word)
+        elif word.lower() == "end":
+            endCount += 1
+            beginEndList.append(word)
+            if beginCount == endCount:
+                resultList.append(beginEndList)
+                beginCount = 0
+                endCount = 0
+                beginEndList = []
+        else:
+            if beginCount > 0:
+                beginEndList.append(word)
+    return resultList
 
