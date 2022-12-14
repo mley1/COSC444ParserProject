@@ -1,3 +1,4 @@
+import variable
 class colors:
     BLUE = '\033[94m'
     CYAN = '\033[96m'
@@ -10,7 +11,7 @@ class colors:
 
 
 def stateChoose(input):
-    States = ['program', 'var', 'procedure', 'function', 'begin'];
+    States = ['program', 'var', 'procedure', 'function', 'begin']
     input = input.lower()
     if input in States:
         return (States.index(input)+1)
@@ -29,6 +30,7 @@ def getToNewLine(inputList):
             newList.append(x)
             #print(newList)
             return newList
+    return newList
 
 
 def spaceDelete(inputList):
@@ -61,3 +63,40 @@ def removeLine(inputList):
         else:
             del inputList[0]
             break
+
+
+#########################################################
+# returns a list of begin end statements
+#########################################################
+def BeginEnd(condList):
+    beginCount = 0
+    endCount = 0
+    resultList = []
+    beginEndList = []
+    for word in condList:
+        if word.lower() == "begin":
+            beginCount += 1
+            beginEndList.append(word)
+        elif word.lower() == "end":
+            endCount += 1
+            beginEndList.append(word)
+            if beginCount == endCount:
+                resultList.append(beginEndList)
+                beginCount = 0
+                endCount = 0
+                beginEndList = []
+        else:
+            if beginCount > 0:
+                beginEndList.append(word)
+    return resultList
+
+
+def lineType(input):
+    States = ['for', 'if', 'begin', 'end']
+    input = input.lower()
+    if input in States:
+        return (States.index(input)+1)
+    elif variable.declaredVarTest(input):
+        return 5
+    else:
+        return 0

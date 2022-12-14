@@ -141,13 +141,14 @@ while True:
                 print('\n Program works')
                 break
             if variable.CheckVar(Fun.spaceDelete(workingList)):
+                variable.declaredVarTest(workingList[0])
                 workingList.remove('\n')
                 print(''.join(workingList))
             elif Fun.stateChoose(workingList[0]) != 0:
-                print(f'CondList = {condList}')
-                print(f'workingList = {workingList}')
+                #print(f'CondList = {condList}')
+                #print(f'workingList = {workingList}')
                 condList = workingList + condList
-                print(f'CondList = {condList}')
+                #print(f'CondList = {condList}')
                 guardA = False
             else:
                 workingList.remove('\n')
@@ -164,9 +165,56 @@ while True:
         print(f'{Fun.colors.RED}Functions Not Yet implemented{Fun.colors.ENDC}')
         break
     elif currentState == 5:
-        workingList.remove('\n')
-        print(''.join(workingList))
-        print(f'{Fun.colors.RED}Main Not Yet implemented{Fun.colors.ENDC}')
+        #print(f'{Fun.colors.RED}Main parse begin{Fun.colors.ENDC}')
+        index = -1
+        for x in workingList:
+            index += 1
+            condList.insert(index,x)
+        #print(condList)
+        mainList = Fun.BeginEnd(condList)
+        mainList = mainList[0]
+
+        guardA = True
+        while guardA == True:
+            #print(mainList)
+            workingList = Fun.getToNewLine(mainList)
+            if len(mainList) > 0:
+                Fun.removeLine(mainList)
+            else:
+                break
+            #print(workingList)
+            #print(mainList)
+            type = Fun.lineType(workingList[0])
+            if type == 0:
+                workingList.remove('\n')
+                print(''.join(workingList) + f'{Fun.colors.RED}'
+                                             f'<--Line contains an error{Fun.colors.ENDC}')
+
+
+            elif type == 1:
+                print(f'{Fun.colors.RED}For Loop Not Yet implemented{Fun.colors.ENDC}')
+            elif type == 2:
+                print(f'{Fun.colors.RED}If Not Yet implemented{Fun.colors.ENDC}')
+
+
+            elif type == 3:
+                #print(f'{Fun.colors.RED}begin detected{Fun.colors.ENDC}')
+                workingList.remove('\n')
+                print(''.join(workingList))
+            elif type == 4:
+                #print(f'{Fun.colors.RED}end detected{Fun.colors.ENDC}')
+                print(''.join(workingList))
+                break
+            elif type == 5:
+                if variable.CheckVarAssignment(Fun.spaceDelete(workingList)):
+                    workingList.remove('\n')
+                    print(''.join(workingList))
+                else:
+                    workingList.remove('\n')
+                    print(''.join(workingList) + f'{Fun.colors.RED}'
+                                                 f'<--Line contains an error{Fun.colors.ENDC}')
+            #print(workingList)
+
         break
 
 

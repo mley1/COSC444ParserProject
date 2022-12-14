@@ -3,4 +3,8 @@ var
 number : integer;
 guard : boolean;
 double,x : real;
-Procedure
+begin
+number = 1;
+guard = False;
+end
+
